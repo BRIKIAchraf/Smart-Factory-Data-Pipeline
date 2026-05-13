@@ -1,0 +1,21 @@
+# Environments
+.env
+.env.*
+
+# Dependencies
+node_modules/
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Docker
+.docker/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

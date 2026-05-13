@@ -1,0 +1,24 @@
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    jsonData:
+      version: Flux
+      organization: factory
+      defaultBucket: telemetry
+    secureJsonData:
+      token: factory-super-secret-token
+
+  - name: PostgreSQL
+    type: postgres
+    url: postgres:5432
+    database: smart_factory
+    user: admin
+    secureJsonData:
+      password: factory
+    jsonData:
+      sslmode: 'disable'
+      postgresVersion: 13
