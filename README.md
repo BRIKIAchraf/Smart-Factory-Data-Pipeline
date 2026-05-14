@@ -61,11 +61,13 @@ docker-compose up -d
 
 ## 🛡️ Robustness & Professionalism
 This version includes significant upgrades over the base implementation:
-1. **Connection Watchdogs**: The edge gateway monitors both PLC and MQTT connectivity, with automatic recovery.
-2. **Postgres Pooling**: High-throughput event logging using connection pooling to prevent DB exhaustion.
-3. **Graceful Shutdown**: All services handle SIGTERM for clean resource cleanup and state preservation.
-4. **Health Monitoring**: Integrated Docker health checks for automated service orchestration.
-5. **Security Ready**: Environment-based credential management and isolated networking.
+1. **Store & Forward**: The edge gateway includes a local SQLite buffer, making the system resilient to intermittent network failures common in industrial environments.
+2. **Predictive Analytics**: Instead of simple thresholding, the processor uses unsupervised Machine Learning to identify "unseen" patterns that might indicate impending mechanical failure.
+3. **Connection Watchdogs**: The edge gateway monitors both PLC and MQTT connectivity, with automatic recovery.
+4. **Postgres Pooling**: High-throughput event logging using connection pooling to prevent DB exhaustion.
+5. **Graceful Shutdown**: All services handle SIGTERM for clean resource cleanup and state preservation.
+6. **Health Monitoring**: Integrated Docker health checks for automated service orchestration.
+7. **Security Ready**: Environment-based credential management and isolated networking.
 
 ---
 

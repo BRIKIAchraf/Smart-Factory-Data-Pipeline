@@ -1,0 +1,7 @@
+user gateway
+topic write factory/#
+topic read factory/#
+
+user bridge
+topic read factory/#
+topic write factory/commands
