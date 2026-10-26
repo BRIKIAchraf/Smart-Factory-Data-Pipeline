@@ -63,3 +63,12 @@ Portfolio implementation and industrial simulation. Hardware, network security, 
 ## Author
 
 **Achraf BRIKI** · [LinkedIn](https://www.linkedin.com/in/achrafbriki/) · [Portfolio](https://achrafbriki.com)
+
+## Delivery profile
+
+**Status:** MVP  
+**Demo:** Local Docker deployment with simulated PLC telemetry, MQTT/Kafka, InfluxDB, PostgreSQL and dashboards.  
+**Prerequisites:** Docker Compose and Node.js for the dashboard.  
+**Validation:** Store-and-forward, reconnects, duplicates, offsets, watchdog recovery and dashboard freshness.  
+**Performance plan:** Measure telemetry rate, buffer growth, latency, consumer lag and recovery time.  
+**Roadmap:** Integration/resilience tests, telemetry contracts, CI, retention policies and load testing.
