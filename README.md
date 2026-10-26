@@ -1,77 +1,60 @@
-# SmartFactory Data Pipeline v2.0 (Pro Edition)
+# Smart Factory Data Pipeline
 
-**Industrial-grade IoT monitoring and data processing pipeline.**
+Event-driven industrial IoT pipeline for collecting, processing and visualising machine telemetry.
 
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
-[![Platform: Docker](https://img.shields.io/badge/Platform-Docker-blue.svg)](https://www.docker.com/)
-[![Architecture: Event--Driven](https://img.shields.io/badge/Architecture-Event--Driven-orange.svg)]()
+## Objective
 
-## 🚀 Overview
+Bridge operational technology and data-platform components so that machine signals can be monitored in near real time while remaining recoverable during connectivity failures.
 
-SmartFactory OS is a comprehensive solution for industrial data ingestion, processing, and visualization. It bridges the gap between traditional PLC systems (Operational Technology) and modern Cloud/Data-Lake architectures (Information Technology).
+## Architecture
 
-### Core Features
-- **High-Performance Ingestion**: Edge gateway polling Modbus/TCP registers at 500ms intervals with MQTT QoS 1 reliability.
-- **Event-Driven Backbone**: Apache Kafka ensures zero data loss and horizontal scalability.
-- **Hybrid Storage**: 
-  - **InfluxDB**: High-resolution time-series data for telemetry.
-  - **PostgreSQL**: Structured event logging and configuration management.
-- **Real-Time Control Center**: Premium React dashboard with glassmorphism aesthetics and live system health tracking.
-- **Industrial Resilience**: Manual Kafka offset commits, structured logging, and robust connection watchdogs.
+~~~text
+OpenPLC / Modbus simulator → Edge Gateway
+                                  ↓ MQTT
+                              Mosquitto
+                                  ↓ bridge
+                                Kafka
+                                  ↓
+                            Data processor
+                         ↙                   ↘
+                  InfluxDB telemetry     PostgreSQL events
+                         ↓                   ↓
+                         Grafana / React control centre
+~~~
 
-## 🏗️ Architecture
+## Core capabilities
 
-```mermaid
-graph TD
-    PLC[OpenPLC Simulation] -->|Modbus/TCP| GW[Edge Gateway]
-    GW -->|MQTT| MQ[Mosquitto Broker]
-    MQ -->|MQTT Bridge| KB[Kafka Bridge]
-    KB -->|Kafka| K[Kafka Cluster]
-    K -->|Consumer| P[Data Processor]
-    P -->|TS Data| I[InfluxDB]
-    P -->|Events| PG[PostgreSQL]
-    I -->|Query| G[Grafana / Dashboard]
-    PG -->|Query| G
-```
+- Modbus/TCP polling at the configured edge interval;
+- MQTT QoS 1 transport and Kafka event backbone;
+- local SQLite store-and-forward buffer;
+- explicit Kafka offset handling and reconnect/watchdog logic;
+- high-resolution telemetry in InfluxDB;
+- structured events and configuration data in PostgreSQL;
+- Grafana dashboards and a React operations interface;
+- anomaly signals based on configurable or unsupervised processing.
 
-## 🛠️ Tech Stack
-- **Edge**: Python 3.9+, PyModbus, Paho-MQTT.
-- **Message Broker**: Apache Kafka (Confluent), Mosquitto.
-- **Processing**: Python, Psycopg2 (Pooling), InfluxDB-Client.
-- **Database**: PostgreSQL 13, InfluxDB 2.7.
-- **Visualization**: Grafana, React 19, Vite, TailwindCSS, Framer Motion.
-- **Infrastructure**: Docker & Docker-Compose.
+## Technology stack
 
-## 🚦 Getting Started
+Python · PyModbus · Paho-MQTT · Mosquitto · Apache Kafka · InfluxDB · PostgreSQL · Grafana · React · Vite · Docker Compose
 
-### Prerequisites
-- Docker & Docker Compose
-- Node.js (for Dashboard development)
+## Quick start
 
-### One-Click Deployment
-```bash
-docker-compose up -d
-```
+Prerequisites: Docker, Docker Compose and Node.js for the dashboard.
 
-### Accessing the Platform
-- **Management Dashboard**: `http://localhost:5173` (run `npm run dev` in dashboard folder)
-- **OpenPLC Console**: `http://localhost:8080`
-- **Grafana Metrics**: `http://localhost:3000`
-- **InfluxDB UI**: `http://localhost:8086`
+~~~bash
+docker compose up -d
+~~~
 
-## 🛡️ Robustness & Professionalism
-This version includes significant upgrades over the base implementation:
-1. **Store & Forward**: The edge gateway includes a local SQLite buffer, making the system resilient to intermittent network failures common in industrial environments.
-2. **Predictive Analytics**: Instead of simple thresholding, the processor uses unsupervised Machine Learning to identify "unseen" patterns that might indicate impending mechanical failure.
-3. **Connection Watchdogs**: The edge gateway monitors both PLC and MQTT connectivity, with automatic recovery.
-4. **Postgres Pooling**: High-throughput event logging using connection pooling to prevent DB exhaustion.
-5. **Graceful Shutdown**: All services handle SIGTERM for clean resource cleanup and state preservation.
-6. **Health Monitoring**: Integrated Docker health checks for automated service orchestration.
-7. **Security Ready**: Environment-based credential management and isolated networking.
+Start the dashboard with the project-specific frontend command. Verify the local ports and credentials in the environment configuration before sharing the system.
 
----
+## Reliability model
 
-## 💼 Commercial & Support
-This software is provided under a **Commercial License**. For redistribution rights, white-labeling options, or custom PLC integrations, please contact the lead developer.
+The pipeline is designed around store-and-forward and explicit recovery. It is not a guarantee of zero data loss until the full failure matrix, duplicate handling, retention and recovery time objectives have been tested.
 
-**Contact**: [Your Contact Info / GitHub Profile]
+## Status
+
+Portfolio implementation and industrial simulation. Hardware, network security, high-volume throughput and failover require additional validation.
+
+## Author
+
+**Achraf BRIKI** · [LinkedIn](https://www.linkedin.com/in/achrafbriki/) · [Portfolio](https://achrafbriki.com)
