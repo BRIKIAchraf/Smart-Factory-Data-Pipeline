@@ -1,3 +1,8 @@
+
+
+## About
+
+Event-driven industrial data pipeline that transports machine telemetry from PLC/Modbus and MQTT into Kafka, InfluxDB, PostgreSQL and operational dashboards.
 # Smart Factory Data Pipeline
 
 Event-driven industrial IoT pipeline for collecting, processing and visualising machine telemetry.
