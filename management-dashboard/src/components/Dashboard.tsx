@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  LineChart, 
   Line, 
   XAxis, 
   YAxis, 
@@ -65,7 +64,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     let ws: WebSocket;
-    let reconnectTimer: NodeJS.Timeout;
+    let reconnectTimer: ReturnType<typeof setTimeout>;
 
     const connectWebSocket = () => {
       ws = new WebSocket('ws://localhost:8081/ws/metrics');
